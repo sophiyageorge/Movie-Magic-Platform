@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Platform - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url("/static/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .banner {
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .movie-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .movie-card:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="banner text-center">
+      <h1 class="display-4">🎬 Movie Magic Platform</h1>
+      <p class="lead">Explore Movies, Reviews, Recommendations and More</p>
+    </div>
+
+
+  <div class="container my-5">
+  <div class="row justify-content-center">
+  <!-- Weather Forecast Container -->
+<div class="container my-5">
+  <div class="card shadow text-white" style="background-color: rgba(0, 123, 255, 0.3); border: 1px solid rgba(255,255,255,0.2);">
+    <div class="card-body">
+      <h4 class="card-title">🌦️ Today's Weather & Movie Mood</h4>
+      <p class="card-text" id="weather-info">
+        <!-- Weather info dynamically inserted here -->
+        ☁️ "{{weather}}"
+      </p>
+      <p class="card-text fst-italic" id="movie-quote">
+        🎬 "{{quote}}"
+
+      </p>
+    </div>
+  </div>
+</div>
+
+    <!-- Left Column: Recommendations -->
+    <div class="col-md-4">
+      <div class="card text-white shadow" style="background-color: rgba(0, 0, 0, 0.4); color: white;">
+        <div class="card-body">
+          <h2 class="card-title">{{ movie['title'] }}</h2>
+          <p><strong>Year:</strong> {{ movie['release_year'] }} | <strong>Rating:</strong> {{ movie['rating'] }}</p>
+          <p>{{ movie['description'] }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card shadow mt-5" style="background-color: rgba(0, 0, 0, 0.6); color: white;">
+  <div class="card-body">
+    <h4 class="card-title">Recommended Movies</h4>
+    <ul class="list-group list-group-flush">
+      {% for rec in recommendations %}
+        <li class="list-group-item bg-dark text-white">
+          <strong>{{ rec['title'] }}</strong> ({{ rec['release_year'] }}) - {{ rec['rating'] }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div> -->
+
+    <!-- Right Column: Movie Info -->  
+       <div class="col-md-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h4 class="card-title">Recommendations</h4>
+          <ul class="list-group list-group-flush">
+             {% for rec in recommendations %}
+            <li class="list-group-item">
+               <strong>{{ rec['title'] }}</strong> ({{ rec['release_year'] }}) - {{ rec['rating'] }}
+            </li>
+            <!-- <li class="list-group-item">🎥 Interstellar (2014)</li>
+            <li class="list-group-item">🎞️ The Dark Knight (2008)</li>
+            <li class="list-group-item">📽️ Tenet (2020)</li>
+            <li class="list-group-item">🎬 Memento (2000)</li> -->
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Review Form Row -->
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6"> <!-- Wider for better input spacing -->
+      <h3 class="text-white">Submit Your Review</h3>
+      <form action="/analyze_review" method="post">
+        <textarea name="review_text" rows="4" class="form-control" required></textarea>
+        <button type="submit" class="btn btn-success mt-3">Analyze Sentiment</button>
+      </form>
+
+      {% if sentiment %}
+      <div class="alert alert-info mt-3">
+        Sentiment: <strong>{{ sentiment }}</strong>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  </div>
+  
+</body>
+</html>
